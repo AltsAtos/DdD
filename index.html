@@ -122,11 +122,11 @@
       if (diasPasados >= 0) {
         let mensaje = `Han pasado ${diasPasados} días desde el ${inputFecha}.`;
         if (diasPasados > 89) {
-          mensaje += "<br><br>La contraseña de red del usuario ha CADUCADO.";
+          mensaje += "<br><br>Contraseña CADUCADA.";
           resultado.className = "result caducada";
           document.body.style.backgroundColor = "#ffdddd";
         } else {
-          mensaje += "<br><br>La contraseña de red del usuario aún es VÁLIDA.";
+          mensaje += "<br><br>Contraseña VÁLIDA.";
           resultado.className = "result valida";
           document.body.style.backgroundColor = "#ddffdd";
         }
