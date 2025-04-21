@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" type="image/x-icon" href="favicon.png">
+  <title>Verificador de Contraseña</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      transition: background-color 0.3s ease;
+    }
+
+    .container {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .logo {
+      max-width: 120px;
+      height: auto;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
+
+    input[type="date"] {
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-left: 0.5rem;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    .result {
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .valida {
+      color: green;
+    }
+
+    .caducada {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="main.png" alt="Logo" class="logo" />
+    <h1>¿Cuántos días han pasado desde?</h1>
+    <input type="date" id="fecha" />
+    <button onclick="calcularDias()">Calcular</button>
+    <div class="result" id="resultado"></div>
+  </div>
+
+  <script>
+    function calcularDias() {
+      const inputFecha = document.getElementById("fecha").value;
+      const resultado = document.getElementById("resultado");
+
+      if (!inputFecha) {
+        resultado.textContent = "Por favor, selecciona una fecha.";
+        document.body.style.backgroundColor = "#f0f4f8";
+        return;
+      }
+
+      const fechaInicio = new Date(inputFecha);
+      const hoy = new Date();
+
+      // Limpiar la hora para evitar errores por diferencia de zonas horarias
+      fechaInicio.setHours(0, 0, 0, 0);
+      hoy.setHours(0, 0, 0, 0);
+
+      const diferenciaMs = hoy - fechaInicio;
+      const diasPasados = Math.floor(diferenciaMs / (1000 * 60 * 60 * 24)) + 1;
+
+      if (diasPasados >= 0) {
+        let mensaje = `Han pasado ${diasPasados} días desde el ${inputFecha}. `;
+        if (diasPasados > 90) {
+          mensaje += "La contraseña de red del usuario ha CADUCADO.";
+          resultado.className = "result caducada";
+          document.body.style.backgroundColor = "#ffdddd"; // rojo claro
+        } else {
+          mensaje += "La contraseña de red del usuario aún es VÁLIDA.";
+          resultado.className = "result valida";
+          document.body.style.backgroundColor = "#ddffdd"; // verde claro
+        }
+        resultado.textContent = mensaje;
+      } else {
+        resultado.textContent = "La fecha seleccionada es en el futuro.";
+        document.body.style.backgroundColor = "#f0f4f8";
+        resultado.className = "result";
+      }
+    }
+  </script>
+</body>
+</html>
