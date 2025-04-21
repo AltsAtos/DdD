@@ -97,15 +97,16 @@
         return;
       }
 
+      const unDiaEnMs = 24 * 60 * 60 * 1000;
       const fechaInicio = new Date(inputFecha);
       const hoy = new Date();
 
-      // Limpiar la hora para evitar errores por diferencia de zonas horarias
+      // Normalizamos ambas fechas para evitar diferencias por horas
       fechaInicio.setHours(0, 0, 0, 0);
       hoy.setHours(0, 0, 0, 0);
 
       const diferenciaMs = hoy - fechaInicio;
-      const diasPasados = Math.floor(diferenciaMs / (1000 * 60 * 60 * 24));
+      const diasPasados = Math.round(diferenciaMs / unDiaEnMs);
 
       if (diasPasados >= 0) {
         let mensaje = `Han pasado ${diasPasados} días desde el ${inputFecha}. `;
