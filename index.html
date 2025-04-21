@@ -34,17 +34,21 @@
       margin-bottom: 1rem;
     }
 
-    .question {
+    .question-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
       font-size: 1.2rem;
       margin-bottom: 1rem;
     }
 
-    .question input[type="date"] {
+    .question-container input[type="date"] {
       padding: 0.4rem;
       font-size: 1rem;
       border: 1px solid #ccc;
       border-radius: 8px;
-      margin: 0 0.3rem;
+      margin: 0 0.4rem;
     }
 
     button {
@@ -80,12 +84,15 @@
 <body>
   <div class="container">
     <img src="main.png" alt="Logo" class="logo" />
-    <div class="question">
-      ¿Cuántos días han pasado desde
+    
+    <div class="question-container">
+      <span>¿Cuántos días han pasado desde</span>
       <input type="date" id="fecha" />
-      ?
+      <span>?</span>
     </div>
+    
     <button onclick="calcularDias()">Calcular</button>
+
     <div class="result" id="resultado"></div>
   </div>
 
@@ -104,7 +111,6 @@
       const fechaInicio = new Date(inputFecha);
       const hoy = new Date();
 
-      // Normalizar fechas
       fechaInicio.setHours(0, 0, 0, 0);
       hoy.setHours(0, 0, 0, 0);
 
