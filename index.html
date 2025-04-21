@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/x-icon" href="favicon.png">
   <title>Verificador de Contraseña</title>
   <style>
@@ -22,9 +23,9 @@
       background: white;
       padding: 2rem;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       text-align: center;
-      max-width: 700px;
+      max-width: 600px;
       width: 100%;
     }
 
@@ -81,16 +82,17 @@
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <img src="main.png" alt="Logo" class="logo" />
-    
+
     <div class="question-container">
       <span>¿Cuántos días han pasado desde</span>
       <input type="date" id="fecha" />
       <span>?</span>
     </div>
-    
+
     <button onclick="calcularDias()">Calcular</button>
 
     <div class="result" id="resultado"></div>
@@ -118,17 +120,17 @@
       const diasPasados = Math.floor(diferenciaMs / unDiaEnMs);
 
       if (diasPasados >= 0) {
-        let mensaje = `Han pasado ${diasPasados} días desde el ${inputFecha}. `;
+        let mensaje = `Han pasado ${diasPasados} días desde el ${inputFecha}.`;
         if (diasPasados > 89) {
-          mensaje += "La contraseña de red del usuario ha CADUCADO.";
+          mensaje += "<br><br>La contraseña de red del usuario ha CADUCADO.";
           resultado.className = "result caducada";
           document.body.style.backgroundColor = "#ffdddd";
         } else {
-          mensaje += "La contraseña de red del usuario aún es VÁLIDA.";
+          mensaje += "<br><br>La contraseña de red del usuario aún es VÁLIDA.";
           resultado.className = "result valida";
           document.body.style.backgroundColor = "#ddffdd";
         }
-        resultado.textContent = mensaje;
+        resultado.innerHTML = mensaje;
       } else {
         resultado.textContent = "La fecha seleccionada es en el futuro.";
         document.body.style.backgroundColor = "#f0f4f8";
@@ -137,4 +139,5 @@
     }
   </script>
 </body>
+
 </html>
