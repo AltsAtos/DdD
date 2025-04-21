@@ -34,20 +34,21 @@
       margin-bottom: 1rem;
     }
 
-    h1 {
+    .question {
+      font-size: 1.2rem;
       margin-bottom: 1rem;
-      font-size: 1.8rem;
     }
 
-    input[type="date"] {
-      padding: 0.5rem;
+    .question input[type="date"] {
+      padding: 0.4rem;
       font-size: 1rem;
       border: 1px solid #ccc;
       border-radius: 8px;
-      margin-bottom: 1rem;
+      margin: 0 0.3rem;
     }
 
     button {
+      margin-top: 1rem;
       padding: 0.5rem 1rem;
       font-size: 1rem;
       background-color: #0077cc;
@@ -55,7 +56,6 @@
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      margin-left: 0.5rem;
     }
 
     button:hover {
@@ -80,8 +80,11 @@
 <body>
   <div class="container">
     <img src="main.png" alt="Logo" class="logo" />
-    <h1>¿Cuántos días han pasado desde?</h1>
-    <input type="date" id="fecha" />
+    <div class="question">
+      ¿Cuántos días han pasado desde
+      <input type="date" id="fecha" />
+      ?
+    </div>
     <button onclick="calcularDias()">Calcular</button>
     <div class="result" id="resultado"></div>
   </div>
@@ -101,23 +104,23 @@
       const fechaInicio = new Date(inputFecha);
       const hoy = new Date();
 
-      // Normalizamos ambas fechas para evitar diferencias por horas
+      // Normalizar fechas
       fechaInicio.setHours(0, 0, 0, 0);
       hoy.setHours(0, 0, 0, 0);
 
       const diferenciaMs = hoy - fechaInicio;
-      const diasPasados = Math.round(diferenciaMs / unDiaEnMs);
+      const diasPasados = Math.floor(diferenciaMs / unDiaEnMs);
 
       if (diasPasados >= 0) {
         let mensaje = `Han pasado ${diasPasados} días desde el ${inputFecha}. `;
         if (diasPasados > 89) {
           mensaje += "La contraseña de red del usuario ha CADUCADO.";
           resultado.className = "result caducada";
-          document.body.style.backgroundColor = "#ffdddd"; // rojo claro
+          document.body.style.backgroundColor = "#ffdddd";
         } else {
           mensaje += "La contraseña de red del usuario aún es VÁLIDA.";
           resultado.className = "result valida";
-          document.body.style.backgroundColor = "#ddffdd"; // verde claro
+          document.body.style.backgroundColor = "#ddffdd";
         }
         resultado.textContent = mensaje;
       } else {
