@@ -105,11 +105,11 @@
       hoy.setHours(0, 0, 0, 0);
 
       const diferenciaMs = hoy - fechaInicio;
-      const diasPasados = Math.floor(diferenciaMs / (1000 * 60 * 60 * 24)) + 1;
+      const diasPasados = Math.floor(diferenciaMs / (1000 * 60 * 60 * 24));
 
       if (diasPasados >= 0) {
         let mensaje = `Han pasado ${diasPasados} días desde el ${inputFecha}. `;
-        if (diasPasados > 90) {
+        if (diasPasados > 89) {
           mensaje += "La contraseña de red del usuario ha CADUCADO.";
           resultado.className = "result caducada";
           document.body.style.backgroundColor = "#ffdddd"; // rojo claro
