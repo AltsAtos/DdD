@@ -117,7 +117,7 @@
       hoy.setHours(0, 0, 0, 0);
 
       const diferenciaMs = hoy - fechaInicio;
-      const diasPasados = Math.floor(diferenciaMs / unDiaEnMs);
+      const diasPasados = Math.floor(diferenciaMs / unDiaEnMs) + 1;
 
       if (diasPasados >= 0) {
         let mensaje = `Han pasado ${diasPasados} días desde el ${inputFecha}.`;
